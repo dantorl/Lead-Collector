@@ -47,7 +47,7 @@ public class ProdutoController {
         Produto produtoObjeto = produtoService.atualizarProduto(produto);
         return produtoObjeto;
     }
-
+//teste add e commit no git
     @DeleteMapping("/{id}")
     public Produto deletarLead(@PathVariable Integer id){
         Optional<Produto> produtoOptional = produtoService.buscarPorId(id);
