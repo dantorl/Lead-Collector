@@ -3,6 +3,7 @@ package com.br.lead.collector.models;
 import com.br.lead.collector.enums.TipoDeLead;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Lead")
@@ -16,6 +17,9 @@ public class Lead {
     private String nome;
     private String email;
     private TipoDeLead tipoDeLead;
+
+    @ManyToMany
+    private List<Produto> produtos;
 
     public Lead() {
     }
@@ -56,5 +60,13 @@ public class Lead {
 
     public void setTipoDeLead(TipoDeLead tipoDeLead) {
         this.tipoDeLead = tipoDeLead;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

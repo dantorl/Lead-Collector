@@ -2,7 +2,9 @@ package com.br.lead.collector.services;
 
 import com.br.lead.collector.enums.TipoDeLead;
 import com.br.lead.collector.models.Lead;
+import com.br.lead.collector.models.Produto;
 import com.br.lead.collector.repositories.LeadRepository;
+import com.br.lead.collector.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,14 @@ public class LeadService {
 
     @Autowired
     private LeadRepository leadRepository;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
+    public Iterable<Produto> buscarTodosProdutos(List<Integer> produtosId){
+        Iterable<Produto> produtosIterable = produtoRepository.findAllById(produtosId);
+        return produtosIterable;
+    }
 
     public Optional buscarPorId(int id){
         Optional<Lead> leadOptional = leadRepository.findById(id);
