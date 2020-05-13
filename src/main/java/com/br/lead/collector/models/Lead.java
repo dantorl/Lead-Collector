@@ -3,6 +3,8 @@ package com.br.lead.collector.models;
 import com.br.lead.collector.enums.TipoDeLead;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -14,7 +16,10 @@ public class Lead {
     private Integer id;
 
     @Column(name = "nome_completo")
+    @Size(min = 8, max = 100, message = "O nome deve ter no minimo 8 caracteres e no maximo 100")
     private String nome;
+
+    @Email(message = "O formato do email é invalido")
     private String email;
     private TipoDeLead tipoDeLead;
 

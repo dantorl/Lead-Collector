@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class LeadController {
         }
     }
     @PostMapping
-    public ResponseEntity<Lead> cadastrarLead(@RequestBody Lead lead){
+    public ResponseEntity<Lead> cadastrarLead(@RequestBody @Valid Lead lead){
         List<Integer> produtosId = new ArrayList<>();
         for (Produto produto: lead.getProdutos()){
             produtosId.add(produto.getId());
