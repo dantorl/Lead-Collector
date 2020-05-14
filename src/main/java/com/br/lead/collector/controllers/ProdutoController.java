@@ -49,7 +49,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public Produto deletarLead(@PathVariable Integer id){
+    public Produto deletarProduto(@PathVariable Integer id){
         Optional<Produto> produtoOptional = produtoService.buscarPorId(id);
         if(produtoOptional.isPresent()){
             produtoService.deletarProduto(produtoOptional.get());
