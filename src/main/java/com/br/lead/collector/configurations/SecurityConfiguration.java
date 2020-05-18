@@ -1,6 +1,7 @@
 package com.br.lead.collector.configurations;
 
 import com.br.lead.collector.security.FiltroAutenticacaoJWT;
+import com.br.lead.collector.security.FiltroAutorizacaoJWT;
 import com.br.lead.collector.security.JWTUtil;
 import com.br.lead.collector.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     };
     private static final String[] PUBLIC_MEATCHERS_POST = {
             "/leads",
-            "/produtos",
             "/usuario/**"
     };
     @Override
@@ -52,12 +52,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);//informa que a aplicação é STATELESS, evitando a geração de token CSRF, já que nao será usado
 
         http.addFilter(new FiltroAutenticacaoJWT(jwtUtil,authenticationManager()));
+        http.addFilter(new FiltroAutorizacaoJWT(authenticationManager(), usuarioService, jwtUtil));
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(usuarioService).passwordEncoder(bCryptPasswordEncoder());
-        
+
     }
 
     @Bean
